@@ -11,12 +11,75 @@ from keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
 from keras.layers import InputLayer #per specificare l'input shape
 import os
+import random
 
 #----------------------------------------------------------------------------------------------------------------------------------------------
 batch_size = 32
 num_classes = 10
 epochs = 100
+populationSize = 10
 #----------------------------------------------------------------------------------------------------------------------------------------------
+
+#TODO inserire un seed per riprodurre l'esperimento
+def createPseudoRandomGenotype():
+    
+    randomGenes = []
+
+    for j in range (0,5):
+        for i in range (0,3):
+            #generate random conv paramater and append to  beforflatter
+            randomGenes.extend( generateRandomConv() )
+            break
+        for i in range (3,5):
+            #generate random conv paramater and append to  beforflatter
+            randomGenes.extend( generateRandomActivation() )
+            break
+        for i in range (5,7):
+            #generate random conv paramater and append to  beforflatter
+            randomGenes.extend( generateRandomMaxPool() )
+            break
+        for i in range (7,9):
+             #generate random conv paramater and append to  beforflatter
+            randomGenes.extend( generateRandomDrop() )
+            break
+    
+
+    for j in range (0,3):
+        for i in range (0,2):
+            #generate random Dense paramater and append to  afterflatter
+            randomGenes.extend( generateRandomDense() )
+            break
+        for i in range (2,4):
+            #generate random Activation paramater and append to  afterflatter
+            randomGenes.extend( generateRandomActivation() )
+            break
+        for i in range (4,6):
+            #generate random Dropout paramater and append to  afterflatter
+            randomGenes.extend( generateRandomDrop() )
+            break
+
+    print ( "Randome genes :"  + str (randomGenes))
+    
+    return randomGenes
+
+#----------------------------------------------------------------------------------------------------------------------------------------------
+def generateRandomActivation():
+    flag = bool(random.getrandbits(1))
+    return flag,"relu"
+def generateRandomConv():
+    flag = bool(random.getrandbits(1))
+    return flag, 32 , 5
+def generateRandomDrop():
+    flag = bool(random.getrandbits(1))
+    return flag, 0.4
+def generateRandomDense():
+    flag = bool(random.getrandbits(1))
+    return flag, 32 
+def generateRandomMaxPool():
+    flag = bool(random.getrandbits(1))
+    return flag, 2
+
+
 
 '''
 L'individuo è caratterizzato da un genotipo e la sua accuratezza
@@ -28,7 +91,6 @@ class Individual (object):
     
     def __repr__(self):
         return "Hi my genotype is \n" + str(self.genotype) + " \n my accuracy is:  " + str(self.accuracy)
-
 
 def createModelFromGenotype( genoma ,x_train):
     
@@ -100,7 +162,8 @@ def createModelFromGenotype( genoma ,x_train):
 def createAndEvaluate(x_train, x_test, y_train,y_test):
 
     #TODO: generare il genoma in maniera "casuale"
-    genoma = [True, 64, 3, True, 'relu', True, 2, True, 0.25, True, 32, 5, True, 'relu', True, 2, True, 0.3, True, 32, 3, True, 'relu', True, 2, True, 0.4, True, 64, 3, True, 'relu', True, 2, True, 0.25, True, 32, 5, True, 'relu', True, 2, True, 0.4, True, 64, True, 'relu', True, 0.25, True, 64, True, 'relu', True, 0.3, True, 64, True, 'relu', True, 0.4]
+    #genoma = [True, 64, 3, True, 'relu', True, 2, True, 0.25, True, 32, 5, True, 'relu', True, 2, True, 0.3, True, 32, 3, True, 'relu', True, 2, True, 0.4, True, 64, 3, True, 'relu', True, 2, True, 0.25, True, 32, 5, True, 'relu', True, 2, True, 0.4, True, 64, True, 'relu', True, 0.25, True, 64, True, 'relu', True, 0.3, True, 64, True, 'relu', True, 0.4]
+    genoma = createPseudoRandomGenotype()
 
     model = createModelFromGenotype (genoma,x_train)
 
@@ -109,7 +172,7 @@ def createAndEvaluate(x_train, x_test, y_train,y_test):
         opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
         # Let's train the model using RMSprop
         model.compile(loss='categorical_crossentropy',optimizer=opt,metrics=['accuracy'])
-        earlystop = keras.callbacks.EarlyStopping(monitor='val_acc', min_delta=0.0, patience=5, verbose=0, mode='auto')
+        earlystop = keras.callbacks.EarlyStopping(monitor='val_acc', min_delta=0.0, patience=5, verbose=1, mode='auto')
         callbacks_list = [earlystop]
 
         x_train = x_train.astype('float32')
@@ -140,13 +203,11 @@ def main():
 
     population = []
 
-    #for i in range (0, populationSize)
-
-    #create first pseudorandom population genotype and evaluate 
-
-    accuracy, genotype = createAndEvaluate(x_train,x_test,y_train,y_test)
-    testSub = Individual(genotype,accuracy)
-    listaInidividui.append(testSub)
+    for i in range (0, populationSize):
+        #create first pseudorandom population genotype and evaluate 
+        accuracy, genotype = createAndEvaluate(x_train,x_test,y_train,y_test)
+        testSub = Individual(genotype,accuracy)
+        population.append(testSub)
 
     #stampa i risultati
     for obj in listaInidividui:
