@@ -1,2 +1,4 @@
-[False, 32, 5, False, 'relu', True, 2, False, 0.4, False, 32, 5, True, 'relu', True, 2, False, 0.4, False, 32, 5, True, 'relu', True, 2, False, 0.4, False, 32, 5, False, 'relu', True, 2, True, 0.4, False, 32, 5, True, 'relu', True, 2, False, 0.4, True, 32, False, 'relu', False, 0.4, False, 32, True, 'relu', True, 0.4, True, 32, False, 'relu', True, 0.4]
-[False, 32, 5, False, 'relu', True, 2, False, 0.4, False, 32, 5, True, 'relu', False, 2, False, 0.4, True, 32, 5, True, 'relu', True, 2, False, 0.4, True, 32, 5, False, 'relu', False, 2, True, 0.4, False, 32, 5, False, 'relu', True, 2, False, 0.4, False, 32, True, 'relu', True, 0.4, True, 32, False, 'relu', True, 0.4, False, 32, True, 'relu', False, 0.4]
+
+from tensorflow.python.client import device_lib
+    
+print(device_lib.list_local_devices())

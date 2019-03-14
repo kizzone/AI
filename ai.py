@@ -12,12 +12,15 @@ from sklearn.model_selection import train_test_split
 from keras.layers import InputLayer #per specificare l'input shape
 import os
 import random
+import time
+from numpy.random import choice
 
 #----------------------------------------------------------------------------------------------------------------------------------------------
 batch_size = 32
 num_classes = 10
-epochs = 100
-populationSize = 10
+epochs = 20
+populationSize = 50
+generation = 100
 #----------------------------------------------------------------------------------------------------------------------------------------------
 
 #TODO inserire un seed per riprodurre l'esperimento
@@ -28,7 +31,7 @@ def createPseudoRandomGenotype():
     for j in range (0,5):
         for i in range (0,3):
             #generate random conv paramater and append to  beforflatter
-            randomGenes.extend( generateRandomConv() )
+            randomGenes.extend( generateRandomConv(j) )
             break
         for i in range (3,5):
             #generate random conv paramater and append to  beforflatter
@@ -36,18 +39,18 @@ def createPseudoRandomGenotype():
             break
         for i in range (5,7):
             #generate random conv paramater and append to  beforflatter
-            randomGenes.extend( generateRandomMaxPool() )
+            randomGenes.extend( generateRandomMaxPool(j) )
             break
         for i in range (7,9):
              #generate random conv paramater and append to  beforflatter
-            randomGenes.extend( generateRandomDrop() )
+            randomGenes.extend( generateRandomDrop(j) )
             break
     
 
     for j in range (0,3):
         for i in range (0,2):
             #generate random Dense paramater and append to  afterflatter
-            randomGenes.extend( generateRandomDense() )
+            randomGenes.extend( generateRandomDense(j) )
             break
         for i in range (2,4):
             #generate random Activation paramater and append to  afterflatter
@@ -55,7 +58,7 @@ def createPseudoRandomGenotype():
             break
         for i in range (4,6):
             #generate random Dropout paramater and append to  afterflatter
-            randomGenes.extend( generateRandomDrop() )
+            randomGenes.extend( generateRandomDrop(j) )
             break
 
     print ( "Randome genes :"  + str (randomGenes))
@@ -65,20 +68,38 @@ def createPseudoRandomGenotype():
 #----------------------------------------------------------------------------------------------------------------------------------------------
 def generateRandomActivation():
     flag = bool(random.getrandbits(1))
-    return flag,"relu"
-def generateRandomConv():
+    activationType = choice(["relu" , "elu" , "tanh" ], p=[0.6, 0.3, 0.1])
+    return flag,activationType
+def generateRandomConv(depth):
     flag = bool(random.getrandbits(1))
-    return flag, 32 , 5
-def generateRandomDrop():
+    if depth < 2:
+        filterNum = choice([64 , 32 , 16 ], p=[0.2, 0.3, 0.5])
+        filterKernel = choice([3, 5, 7], p=[0.5, 0.3, 0.2])
+    else:
+        filterNum = choice([64 , 32 , 16 ], p=[0.5, 0.3, 0.2])
+        filterKernel = choice([3, 5, 7], p= [0.2, 0.3, 0.5])
+    return flag, filterNum , filterKernel
+def generateRandomDrop(depth):
     flag = bool(random.getrandbits(1))
-    return flag, 0.4
-def generateRandomDense():
+    if depth < 2:
+        drop = choice([0.3 , 0.4 , 0.5 ], p=[0.2, 0.3, 0.5])
+    else:
+        drop = choice([0.3 , 0.4 , 0.5 ], p=[0.5, 0.3, 0.2])
+    return flag, drop
+def generateRandomDense(depth):
     flag = bool(random.getrandbits(1))
-    return flag, 32 
-def generateRandomMaxPool():
+    if depth < 2:
+        neur = choice([64 , 128 , 32 ], p=[0.3, 0.5, 0.2])
+    else:
+        neur = choice([64 , 128 , 32 ], p=[0.3, 0.2, 0.5])
+    return flag, neur 
+def generateRandomMaxPool(depth):
     flag = bool(random.getrandbits(1))
-    return flag, 2
-
+    if depth < 2:
+        size = choice([2 , 4 ], p=[0.6, 0.4])
+    else:
+        size = choice([2 , 4  ], p=[0.4, 0.6])
+    return flag, size
 
 
 '''
@@ -90,7 +111,7 @@ class Individual (object):
         self.accuracy = accuracy
     
     def __repr__(self):
-        return "Hi my genotype is \n" + str(self.genotype) + " \n my accuracy is:  " + str(self.accuracy)
+        return "Hi my genotype is \n" + str(self.genotype) + "\nmy accuracy is:  " + str(self.accuracy) + "\n"
 
 def createModelFromGenotype( genoma ,x_train):
     
@@ -159,20 +180,19 @@ def createModelFromGenotype( genoma ,x_train):
     model.summary()
     return model
 
-def createAndEvaluate(x_train, x_test, y_train,y_test):
+def createAndEvaluate(genome, x_train, x_test, y_train,y_test):
 
-    #TODO: generare il genoma in maniera "casuale"
     #genoma = [True, 64, 3, True, 'relu', True, 2, True, 0.25, True, 32, 5, True, 'relu', True, 2, True, 0.3, True, 32, 3, True, 'relu', True, 2, True, 0.4, True, 64, 3, True, 'relu', True, 2, True, 0.25, True, 32, 5, True, 'relu', True, 2, True, 0.4, True, 64, True, 'relu', True, 0.25, True, 64, True, 'relu', True, 0.3, True, 64, True, 'relu', True, 0.4]
-    genoma = createPseudoRandomGenotype()
+    
 
-    model = createModelFromGenotype (genoma,x_train)
+    model = createModelFromGenotype (genome,x_train)
 
     try:
         # initiate RMSprop optimizer
         opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
         # Let's train the model using RMSprop
         model.compile(loss='categorical_crossentropy',optimizer=opt,metrics=['accuracy'])
-        earlystop = keras.callbacks.EarlyStopping(monitor='val_acc', min_delta=0.0, patience=5, verbose=1, mode='auto')
+        earlystop = keras.callbacks.EarlyStopping(monitor='val_acc', min_delta=0.0, patience=3, verbose=1, mode='auto')
         callbacks_list = [earlystop]
 
         x_train = x_train.astype('float32')
@@ -183,10 +203,10 @@ def createAndEvaluate(x_train, x_test, y_train,y_test):
         model.fit(x_train, y_train,batch_size=batch_size,epochs=epochs,validation_data=(x_test, y_test),shuffle=True,verbose=1,callbacks=callbacks_list)
 
         scores = model.evaluate(x_test, y_test, verbose=1)
-        return scores[1],genoma
+        return scores[1]
 
     except:
-        return -1,genoma
+        return -1
 
 
 def main():
@@ -203,16 +223,29 @@ def main():
 
     population = []
 
+    
+
+    start = time.time()
+
     for i in range (0, populationSize):
         #create first pseudorandom population genotype and evaluate 
-        accuracy, genotype = createAndEvaluate(x_train,x_test,y_train,y_test)
-        testSub = Individual(genotype,accuracy)
+        genoma = createPseudoRandomGenotype()
+        accuracy = createAndEvaluate(genoma, x_train,x_test,y_train,y_test)
+        testSub = Individual(genoma,accuracy)
         population.append(testSub)
 
     #stampa i risultati
-    for obj in listaInidividui:
-        print(str(obj))
+    #for obj in population:
+    ##    print(str(obj))
+    end = time.time()
 
+    elapsedTime = end - start
+    with open('currentpopulation.txt', 'w') as filehandle:  
+        filehandle.writelines("%s\n" % people for people in population)
+        filehandle.writelines("Total time: %d\n" % elapsedTime)
+
+    #do ngeneration times
+    #create a new population from the "best" ones and run new evaluation
 
 if __name__ == "__main__":
     main()

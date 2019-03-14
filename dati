@@ -1,0 +1,2 @@
+
+[False, 64, 3, True, 'relu', False, 4, True, 0.5, False, 16, 3, True, 'relu', True, 4, False, 0.5, True, 64, 7, True, 'elu', True, 2, True, 0.3, False, 64, 7, False, 'relu', True, 2, False, 0.4, False, 64, 5, False, 'tanh', True, 4, False, 0.4, False, 32, False, 'elu', False, 0.3, True, 64, False, 'relu', False, 0.3, False, 32, False, 'relu', True, 0.3]
