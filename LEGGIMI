@@ -1,0 +1,187 @@
+NOTA: se  state  usando ``less''  per  leggere  questo file,  usate  PageUp
+      PageDown  per  spostarvi e  ``q''  per  uscire  (ESC per  uscire  dal
+      prompt).
+
+ISTRUZIONI
+^^^^^^^^^^
+ACCESSO AI LABORATORI: 
+
+ - la  porta  di  ingresso  alla  palazzina DEVE  essere  sempre  chiusa  e
+   bloccata,  chi la  trovasse aperta  È  TENUTO a  chiuderla e  bloccarla.
+   Telefonare al diretto interessato o ai laboratori per farsi aprire.
+ - viceversa le  porte dei singoli  laboratori DEVONO essere  tenute aperte
+   fintantoché c'è qualcuno dentro
+ - l'ultimo che  lascia un laboratorio  DEVE chiuderlo a chiave!  dopo aver
+   chiuso il  laboratorio le  chiavi NON  vanno lasciate  incostudite bensì
+   vanno riportate al loro posto nella cassettiera al primo piano di fianco
+   al FAX
+ - nella palazzina è SEVERAMENTE vietato fumare
+ - al  primo  piano  è  installata   una  macchina  del  caffè  liberamente
+   utilizzabile; chi sporca i muri è però tenuto alla loro ritinteggiatura!
+
+ACCESSO AL SISTEMA INFORMATICO:
+
+ - l'account che vi è stato fornito è assolutamente personale, quindi siete
+   responsabili PENALMENTE di qualunque cosa viene fatta con detto account.
+   Inoltre nel modulo  di richiestra account vi impegnate a  non rivelare a
+   nessun altro la password: vedete un po' voi...
+ - a tutti  viene assegnata  una HOME directory  propria, quindi  è inutile
+   crearsi una sottodirectory con il proprio nome.
+ - la password  che vi viene data insieme all'account  DEVE essere cambiata
+   immediatamente (per farlo "telnet Aida" e poi "yppasswd").
+ - l'account che vi  è stato fornito appartiene al  gruppo studenti (corsi,
+   laurea o  diploma), quando entrate  in tesi  o vi laureate  segnalate il
+   passaggio a federici@ce.unipr.it per l'aggiornamento dei gruppi e per la
+   modifica dei diritti di stampa e risorse varie.
+ - La  scadenza  dell'account è  controllabile  tramite  form presente  sul
+   nostro sito web - area studenti.
+ - chi lascia una stazione di lavoro  è tenuto ad uscire e lasciarla libera
+   per gli altri.
+ - solo la stampante piano basso (downlaser) è di libero utilizzo.
+ - lo spazio  disco  è  limitato, in  caso non  sia sufficiente  rivolgersi
+   rigorosamente al proprio (co)relatore.
+ - l'accesso alle macchine windows  non e' centralizzato (per ora) chiedere
+   al proprio (co)relatore il permesso per l'utilizzo e/o un account.
+ - in   caso   si   necessiti   di   potenza   di   calcolo   è   possibile
+   richiedere  un  account  al  centro di  calcolo  che  possiede  macchine
+   mooolto   più  potenti   delle   nostre.  Il   modulo   lo  trovate   in
+   http://www.cce.unipr.it/documentazione/richiesta.html
+ - il nostro sito web è all'indirizzo: http://www.ce.unipr.it/ (buona parte
+   delle pagine sono  disponibili in italiano, per  potervi accedere dovete
+   impostare le  preferenze del browser  che usate in maniera  da impostare
+   come prima lingua l'italiano [it]).
+ - tutti gli utenti  sono caldamente invitati a crearsi  una propria pagina
+   web (in public_html, guardare il file test.html come esempio).
+ - la posta elettronica è accessibile via POP da mail.ce.unipr.it, guardare
+   sul sito web -> area  riservata per avere maggiori dettagli.
+   Il vostro  indirizzo di  posta è VOSTROLOGIN@ce.unipr.it,  posta diretta
+   a  macchine  specifiche  (ad  esempio a  pippo@aida.ce.unipr.it)  non  è
+   garantito  che arrivi.  Tramite il  sito web  area studenti  è possibile
+   conoscere l'indirizzo e-mail delle altre persone.
+   Se volete  redirigere la  posta su altro  account, dovete  modificare il
+   file .procmailrc nella vostra HOME come da commenti che trovate nel file
+   stesso.
+   Per gli studenti la quota di spazio disco per la posta è 3 MByte, mentre
+   per i tesisti è di 10 MByte
+
+
+Il sistema è già parzialmente configurato, in particolare sono configurati:
+
+X11      parzialmente, lanciare  "startx" NON  xinit o openwin,  le lettere
+         accentate  si ottengono  con  l'ALT o  Tasto Win  di  destra e  la
+         lettera/tasto sopra/sotto
+
+mutt     per la posta elettronica, è già configurato
+
+LaTeX    per scrivere  tesi, tesine etc.;  istruzioni e file di  esempio si
+         possono trovare a partire dal nostro sito web area studenti.
+
+lpr      per  stampare. NOTA:  si possono  stampare SOLO  file postscript!,
+         per  i file  ASCII  usare  a2ps, per  altro  convertire SEMPRE  in
+         postscript.  Ad  esempio,  se  si  desidera  stampare  da  qualche
+         applicazione windows, stampare su  file selezionando una stampante
+         postscript  e  quindi  trasferire  il risultato  su  una  macchina
+         unix/linux e usare lpr
+
+a2ps     per stampare file ASCII, fate attenzione alle opzioni (man a2ps)
+
+wnb      vocabolario sinonimi/contrari inglese
+
+xfig     per disegnare 2D
+
+xmgrace  si chiama diversamente a seconda delle macchine, serve per grafici
+
+gimp     per fotoritocco
+
+man      per la documentazione
+
+mozilla
+netscape per il web e per la posta elettronica locale
+
+ddd
+xxgdb    debugger c, c++
+
+Non  è detto  che  i programmi  sopraindicati siano  presenti  su tutte  le
+macchine, e,  in generale,  su macchine  differenti sono  presenti versioni
+differenti:  è comunque  sempre  possibile lanciarli  da un'altra  macchina
+con  display remoto:  per fare  questo e'  necessario collegarsi  all'altra
+macchina ("rlogin nomealtramacchina") e settare il display ("setenv DISPLAY
+nomemacchinadovesiete:0").
+
+Ad ognuno  viene assegnata una quota  di spazio disco oltre  alla quale non
+riesce a  scrivere piu' nulla;  per controllarla "quota". Si  suggerisce di
+controllare  periodicamente la  cache del  netscape con  il comando  "du -s
+~/.netscape/cache"  e  ripulirla se  necessario.  Inoltre  si consiglia  di
+comprimere i file più grossi e meno utilizzati (gzip -9 <nomefile>).
+Negli  account piú  recenti è  stato aggiunto  l'alias ``occupazione''  che
+permette il controllo dello spazio occupato directory per directory.
+
+Tipicamente  alcune domande  (ad  esempio ``come  faccio  a stampare  dalle
+macchine Windows ?'' oppure ``ma il tale  comando come si usa ?'') se fatte
+direttamente a  me provocano una  immediata diminuzione dello  spazio disco
+a  propria  disposizione. L'eventuale  spazio  disco  rimosso potrà  venire
+ripristinato  previa  distribuzione  rituale  di  paste  al  personale  del
+laboratorio ;-)
+
+In caso di  necessità temporanee è possibile scrivere in  /tmp che comunque
+tipicamente viene cancellata al boot...
+
+Lo spegnimento  non autorizzato di  una macchina viene  sanzionato mediante
+sostituzione della shell di default con la Korn shell (ksh).
+
+Le home  degli utenti  NON sono  sotto backup,  si consiglia  di provvedere
+personalmente  (a tal  proposito si  rammenta che  esistono nei  laboratori
+alcune unità  ZIP e/o  nastro). Anche  le macchine  windows NON  sono sotto
+backup: periodicamente i file dati vengono cancellati per fare spazio...
+
+Nella tua HOME directory sono  inoltre state create alcune sottodirectory e
+file (prima di fare modifiche pensateci bene):
+
+Mail:        contiene la  posta elettronica gestita tramite netscape.
+
+public:      leggibile e scrivibile da tutti  serve per scambiare file con 
+             altri utenti
+
+public_html: contiene   la   tua   pagina   web  ed   e'   accessibile   da
+             http://www.ce.unipr.it/~VOSTROLOGIN che  viene automaticamente
+             (giorno  per  giorno)  linkata nella  pagina  degli  studenti,
+             http://www.ce.unipr.it/students. Chi vuole crearsi una propria
+             pagina web deve creare un file index.html di partenza (provate
+             a  vedere test.html  come  punto  di partenza).  Naturalmente,
+             detto file  dovrà essere  leggibile da chiunque  (chmod ugoa+r
+             index.html) e sopratutto è opportuno che non sia vuoto.
+
+papers:      è pensata  per contenere i  file di testo, i  documenti, tesi,
+             tesine etc.  (naturalmente non e' obbligatorio  usarla, giusto
+             per uniformare il tutto)
+
+bin:         è pensata per contenere i propri file batch ed eventuali  file
+             eseguibili (è già nel vostro PATH)
+
+.plan:
+.project:    contengono informazioni sull'utente e  la data di assegnazione
+             del login che  appaiono con "finger LOGINUTENTE@NOMEMACCHINA",
+             le imprecisioni vanno segnalate a root@ce.unipr.it
+
+.signature:  è la ``firma'' che  viene inserita  quando  si spedisce  posta 
+             elettronica
+
+.xinitrc     contiene i programmi  lanciati  all'avvio   di  X11,  dovrebbe
+             funzionare su tutte le macchine (SUN, Linux, SGI...)
+
+.cshrc:
+.user-cshrc: contengono le configurazioni principali dell'account
+
+
+NOTA:        per  evitare il  fastidioso  messaggio che  invita a  leggersi
+             questo file cambiategli nome.
+
+ALTRANOTA:   correzioni e/o  integrazioni  a questo  file  sono  benvenute,
+             mandatele a bertozzi@ce.unipr.it
+
+--
+Massimo Bertozzi   
+Dipartimento di Ingegneria dell'Informazione   Voice:      +39 0521 90 5735
+Universita' di Parma, I-43100 Parma, ITALY     Fax:        +39 0521 90 5723
+WWW: http://www.ce.unipr.it/people/bertozzi    E-mail: bertozzi@CE.UniPR.IT
+
