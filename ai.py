@@ -25,6 +25,7 @@ populationSize = 50
 generation =  10
 pazienza= 3
 #----------------------------------------------------------------------------------------------------------------------------------------------
+#Ritora una lista contentente i 5 Individui migliori
 def getBest5( best5, individual):
     if len(best5) == 0:
         best5.append(individual)
@@ -37,6 +38,7 @@ def getBest5( best5, individual):
                 break
     return sorted(best5, key=lambda x: x.accuracy, reverse=False)
 
+#Crea, secondo la specifica,  un genoma casuale per un individuo 
 def createPseudoRandomGenotype():
     
     randomGenes = []
@@ -78,37 +80,42 @@ def createPseudoRandomGenotype():
     
     return randomGenes
 
+#Genera i parametri per un'attivazione di tipo casuale, relu è quella più probabile
 def generateRandomActivation():
     flag = bool(random.getrandbits(1))
     activationType = choice(["relu" , "elu" , "tanh" ], p=[0.6, 0.3, 0.1])
     return flag,activationType
 
+#Genera i parametri per una convoluzione di tipo casuale, il numero di filtri e la grandezza del kernel aummenta con l'aumentare della profondità del modello, 
 def generateRandomConv(depth):
     flag = bool(random.getrandbits(1))
     if depth < 2:
-        filterNum = choice([64 , 32 , 16 ], p=[0.2, 0.3, 0.5])
+        filterNum = choice([64 , 128 , 256 , 512 ], p=[0.6, 0.2 , 0.15, 0.05])
         filterKernel = choice([3, 5, 7], p=[0.5, 0.3, 0.2])
     else:
-        filterNum = choice([64 , 32 , 16 ], p=[0.5, 0.3, 0.2])
+        filterNum = choice([512 , 256, 128 , 64], p=[0.6, 0.2 , 0.15, 0.05])
         filterKernel = choice([3, 5, 7], p= [0.2, 0.3, 0.5])
     return flag, filterNum , filterKernel
 
+#Genera i parametri per un Dropout casuale, il valore aumenta con la profondità
 def generateRandomDrop(depth):
     flag = bool(random.getrandbits(1))
     if depth < 2:
-        drop = choice([0.3 , 0.4 , 0.5 ], p=[0.2, 0.3, 0.5])
+        drop = choice([0.3 , 0.4 , 0.5 ], p=[ 0.5 , 0.3, 0.2])
     else:
-        drop = choice([0.3 , 0.4 , 0.5 ], p=[0.5, 0.3, 0.2])
+        drop = choice([0.4 , 0.5 , 0.7 ], p=[0.2, 0.3, 0.5])
     return flag, drop
 
+#Genera i parametri per un Dense casuale, il valore aumenta con la profondità
 def generateRandomDense(depth):
     flag = bool(random.getrandbits(1))
     if depth < 2:
-        neur = choice([64 , 128 , 32 ], p=[0.3, 0.5, 0.2])
+        neur = choice([ 128 , 256,  512 ], p=[0.5, 0.3, 0.2])
     else:
-        neur = choice([64 , 128 , 32 ], p=[0.3, 0.2, 0.5])
+        neur = choice([ 128 , 256,  512 ], p=[0.2, 0.3, 0.5])
     return flag, neur 
 
+#Genera i parametri per un maxpool casuale
 def generateRandomMaxPool(depth):
     flag = bool(random.getrandbits(1))
     if depth < 2:
@@ -117,9 +124,7 @@ def generateRandomMaxPool(depth):
         size = choice([2 , 4  ], p=[0.8, 0.2])
     return flag, size
 
-'''
-L'individuo è caratterizzato da un genotipo e la sua accuratezza
-'''
+#L'individuo è caratterizzato da un genotipo e la sua accuratezza
 class Individual (object):
     def __init__(self, genotype, accuracy):
         self.genotype = genotype
@@ -128,18 +133,20 @@ class Individual (object):
     def __repr__(self):
         return str(self.genotype) + ":" + str(self.accuracy) + "\n"
 
+#Crea il modello sequenziale a partire dal genoma specificato
 def createModelFromGenotype( genoma ,x_train):
     
+    #a 45 c'è la seconda parte del genoma
     split = 45
     part1 = genoma [:split]
     part2 = genoma [split:]
 
     model = Sequential()
+    #input layer di ingresso
     model.add(InputLayer(input_shape=x_train.shape[1:]))
 
     beforeFlatten = []
     afterFlatten = []
-
 
     try: 
         for j in range (0,5):
@@ -170,7 +177,6 @@ def createModelFromGenotype( genoma ,x_train):
         for j in range (0,3):
             afterFlatten.append( part2[6 * j: (6*j) + 6 ])
     
-        #----------------------------------------------------layer fisso-----------------------------------------------
         model.add(Flatten())
 
         for row in afterFlatten:
@@ -190,18 +196,16 @@ def createModelFromGenotype( genoma ,x_train):
                     model.add( Dropout (row[5] )  )
                     break
 
-        #----------------------------------------------------layers fissi----------------------------------------------- 
         model.add(Dense(num_classes))
         model.add(Activation('softmax'))
-
         model.summary()
+
         return model
     except:
         return None
 
+#Crea il modello e lo valuta, ritorna -1 se il modello generato è inutilizzabile
 def createAndEvaluate(genome, x_train, x_test, y_train,y_test):
-
-    #-------------------------------------------
 
     model = createModelFromGenotype (genome,x_train)
 
@@ -230,6 +234,7 @@ def createAndEvaluate(genome, x_train, x_test, y_train,y_test):
     else:
         return -1
 
+#Seleziona due individui casuali, diversi tra loro, da far combinare
 def selecteTwoRandowPeople (list):
     rand1 = randint (0, len(list)-1)
     rand2 = randint (0, len(list)-1)
@@ -238,7 +243,8 @@ def selecteTwoRandowPeople (list):
     else:
         return selecteTwoRandowPeople(list)
 
-# è la funzione piu brutta che abbia mai fatto, trova un modo migliore per cortesia
+# è la funzione piu brutta che abbia mai fatto, trova un modo migliore per cortesia,
+# Modifica un gene casuale, il gene non riottiene lo stesso valore che aveva prima
 def makingRandomMutation(genome):
 
     rand = randint (0,len(genome)-1)
@@ -251,7 +257,7 @@ def makingRandomMutation(genome):
             genome[rand] = not genome[rand]
         elif remainder == 1:
             #conv filter numb
-            a = [64 , 32 , 16 ]
+            a = [64 , 128 , 256 , 512 ]
             a.remove(genome[rand])
             genome[rand] = choice(a)
         elif remainder == 2:
@@ -280,7 +286,7 @@ def makingRandomMutation(genome):
             genome[rand] = not genome[rand]
         elif remainder == 8:
             #dropout rate
-            a = [0.3 , 0.4 , 0.5 ]
+            a = [0.3 , 0.4 , 0.5, 0.7]
             a.remove(genome[rand])
             genome[rand] = choice(a)
     else:
@@ -290,7 +296,7 @@ def makingRandomMutation(genome):
             genome[rand] = not genome[rand]
         elif remainder == 4:
             #dense neurons
-            a = [64 , 128 , 32 ]
+            a = [ 128 , 256,  512 ]
             a.remove(genome[rand])
             genome[rand] = choice(a)
         elif remainder == 5:
@@ -306,12 +312,13 @@ def makingRandomMutation(genome):
             genome[rand] = not genome[rand]
         elif remainder == 2:
             #dropout rate
-            a = [0.3 , 0.4 , 0.5 ]
+            a = [0.3 , 0.4 , 0.5, 0.7]
             a.remove(genome[rand])
             genome[rand] = choice(a)
 
     return genome
 
+#Esegue un Single-point crossover e una mutazione ad uno specifico rate
 def combine(a,b):
 
     c = []
@@ -325,6 +332,7 @@ def combine(a,b):
         c = makingRandomMutation(c)
     return c
 
+#Ritorna una lista di nuovi genotipi tramite i meccanismi di crossover e mutation
 def crossoverAndMutation(lista):
         
     newGenotypes = []
@@ -337,6 +345,7 @@ def crossoverAndMutation(lista):
         #print("newGenotype is now  " + str(newGenotypes))
     return newGenotypes
 
+#Ritorna l'indice migliore di una lista associato a un dato
 def binarySearch(data, val):
     lo, hi = 0, len(data) - 1
     best_ind = lo
@@ -355,9 +364,11 @@ def binarySearch(data, val):
             best_ind = mid
     return best_ind
 
+#Crea una lista di nuovi genotipi, seleziona gli individui con fitness piu alta
+#https://stackoverflow.com/questions/16489449/select-element-from-array-with-probability-proportional-to-its-value/42855534#42855534
 def createNewGeneration(olderGeneration):
 
-    #selecting individal with fitness above average
+    #selecting individal with higher fitness
     newerGenerationGenotype = []
     toMix = []
 
@@ -365,28 +376,27 @@ def createNewGeneration(olderGeneration):
     weigthedprobability = np.cumsum( olderGenerationaccuracy)
 
     for i in range (0, populationSize):
-        #contare pure i -1??
         rand = uniform (0, weigthedprobability[-1] )
-        #trovare a quale indice appartiene e ritornare il cromosoma corrispondente a quell'accurac
+        #trovare a quale indice appartiene e ritornare il cromosoma corrispondente a quell'accuracy
         index = binarySearch(weigthedprobability, rand)
 
         cromosoma =  [ t.genotype for t in olderGeneration if t.accuracy ==  olderGenerationaccuracy[index] ]
     
         toMix.extend(cromosoma)
         
-    #print (" Selected nodes to MIX:" + str ( toMix ) )
     x = crossoverAndMutation( toMix )
     newerGenerationGenotype.extend( x )
 
     return newerGenerationGenotype
 
+#Calcola l'accuratezza media della generazione
 def calculateGenerationAccuracy(generation):
     if len(generation)==0:
         return 0
     else:
         return generation[0].accuracy + calculateGenerationAccuracy(generation[1:]) 
-#---------------------------------------------------------------------------------
 
+#----------------------------------------------------------------------------------------------------------------------------------------
 def main():
 
     # The data, split between train and test sets:
@@ -429,8 +439,7 @@ def main():
     
     print("Original population best five",str(best5))
  
-
-
+ 
     for gen in range (0, generation):
         print ("current generation " + str(gen) + "/" + str(generation))
         currentpopulationgenome = createNewGeneration(population)
