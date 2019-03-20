@@ -1,5 +1,5 @@
 from __future__ import print_function
-import numpy
+import numpy as np
 import keras
 from keras.utils import np_utils
 from keras.datasets import cifar10
@@ -12,17 +12,31 @@ import os
 import random
 import time
 from numpy.random import choice
+from random import randint,uniform 
 from keras import backend as K
+from timeit import default_timer as timer
 K.set_image_dim_ordering('th')
 
 #----------------------------------------------------------------------------------------------------------------------------------------------
-batch_size = 32
+batch_size = 512
 num_classes = 10
-epochs = 20
-populationSize = 10
-generation = 100
+epochs = 50
+populationSize = 50
+generation =  10
+pazienza= 3
 #----------------------------------------------------------------------------------------------------------------------------------------------
-#TODO inserire un seed per riprodurre l'esperimento
+def getBest5( best5, individual):
+    if len(best5) == 0:
+        best5.append(individual)
+    else:
+        for obj in best5:
+            if individual.accuracy > obj.accuracy or len(best5) < 5:
+                if len(best5) == 5:
+                    best5.remove(obj)
+                best5.append(individual)
+                break
+    return sorted(best5, key=lambda x: x.accuracy, reverse=False)
+
 def createPseudoRandomGenotype():
     
     randomGenes = []
@@ -60,13 +74,15 @@ def createPseudoRandomGenotype():
             randomGenes.extend( generateRandomDrop(j) )
             break
 
-    print ( "Randome genes :"  + str (randomGenes))
+    #print ( "Randome genes :"  + str (randomGenes))
     
     return randomGenes
+
 def generateRandomActivation():
     flag = bool(random.getrandbits(1))
     activationType = choice(["relu" , "elu" , "tanh" ], p=[0.6, 0.3, 0.1])
     return flag,activationType
+
 def generateRandomConv(depth):
     flag = bool(random.getrandbits(1))
     if depth < 2:
@@ -76,6 +92,7 @@ def generateRandomConv(depth):
         filterNum = choice([64 , 32 , 16 ], p=[0.5, 0.3, 0.2])
         filterKernel = choice([3, 5, 7], p= [0.2, 0.3, 0.5])
     return flag, filterNum , filterKernel
+
 def generateRandomDrop(depth):
     flag = bool(random.getrandbits(1))
     if depth < 2:
@@ -83,6 +100,7 @@ def generateRandomDrop(depth):
     else:
         drop = choice([0.3 , 0.4 , 0.5 ], p=[0.5, 0.3, 0.2])
     return flag, drop
+
 def generateRandomDense(depth):
     flag = bool(random.getrandbits(1))
     if depth < 2:
@@ -90,6 +108,7 @@ def generateRandomDense(depth):
     else:
         neur = choice([64 , 128 , 32 ], p=[0.3, 0.2, 0.5])
     return flag, neur 
+
 def generateRandomMaxPool(depth):
     flag = bool(random.getrandbits(1))
     if depth < 2:
@@ -182,6 +201,8 @@ def createModelFromGenotype( genoma ,x_train):
 
 def createAndEvaluate(genome, x_train, x_test, y_train,y_test):
 
+    #-------------------------------------------
+
     model = createModelFromGenotype (genome,x_train)
 
     if model is not None:
@@ -189,8 +210,9 @@ def createAndEvaluate(genome, x_train, x_test, y_train,y_test):
             # initiate RMSprop optimizer
             opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
             # Let's train the model using RMSprop
+            #parallel_model = multi_gpu_model(model, gpus=num_gpu)
             model.compile(loss='categorical_crossentropy',optimizer=opt,metrics=['accuracy'])
-            earlystop = keras.callbacks.EarlyStopping(monitor='val_acc', min_delta=0.0, patience=3, verbose=1, mode='auto')
+            earlystop = keras.callbacks.EarlyStopping(monitor='val_acc', min_delta=0.0, patience = pazienza , verbose=0, mode='auto')
             callbacks_list = [earlystop]
 
             x_train = x_train.astype('float32')
@@ -198,7 +220,7 @@ def createAndEvaluate(genome, x_train, x_test, y_train,y_test):
             x_train /= 255
             x_test /= 255
 
-            model.fit(x_train, y_train,batch_size=batch_size,epochs=epochs,validation_data=(x_test, y_test),shuffle=True,verbose=1,callbacks=callbacks_list)
+            model.fit(x_train, y_train,batch_size=batch_size,epochs=epochs,validation_data=(x_test, y_test),shuffle=True,verbose=0,callbacks=callbacks_list)
 
             scores = model.evaluate(x_test, y_test, verbose=1)
             return scores[1]
@@ -208,39 +230,162 @@ def createAndEvaluate(genome, x_train, x_test, y_train,y_test):
     else:
         return -1
 
+def selecteTwoRandowPeople (list):
+    rand1 = randint (0, len(list)-1)
+    rand2 = randint (0, len(list)-1)
+    if rand2 != rand1:
+        return list[rand1],list[rand2]
+    else:
+        return selecteTwoRandowPeople(list)
 
+# è la funzione piu brutta che abbia mai fatto, trova un modo migliore per cortesia
+def makingRandomMutation(genome):
 
+    rand = randint (0,len(genome)-1)
+    print("mutation at index", rand)
+    if rand < 45:
+        #extract  beforeFlatten "rows"
+        remainder = rand % 9
+        if remainder == 0:
+            #conv flag, flipping flag
+            genome[rand] = not genome[rand]
+        elif remainder == 1:
+            #conv filter numb
+            a = [64 , 32 , 16 ]
+            a.remove(genome[rand])
+            genome[rand] = choice(a)
+        elif remainder == 2:
+            #conv kernel size
+            a = [3, 5, 7]
+            a.remove(genome[rand])
+            genome[rand]  = choice(a)
+        elif remainder == 3:
+            #activation flag
+            genome[rand] = not genome[rand]
+        elif remainder == 4:
+            #activation type
+            a = ["relu" , "elu" , "tanh" ]
+            a.remove(genome[rand])
+            genome[rand] = choice(a)
+        elif remainder == 5:
+            #maxpool flag
+            genome[rand] = not genome[rand]
+        elif remainder == 6:
+            #maxpool size
+            a = [2 , 4 ]
+            a.remove(genome[rand])
+            genome[rand] = choice(a)
+        elif remainder == 7:
+            #dropout flag
+            genome[rand] = not genome[rand]
+        elif remainder == 8:
+            #dropout rate
+            a = [0.3 , 0.4 , 0.5 ]
+            a.remove(genome[rand])
+            genome[rand] = choice(a)
+    else:
+        remainder = rand % 6
+        if remainder == 3:
+            #dense flag, flipping flag
+            genome[rand] = not genome[rand]
+        elif remainder == 4:
+            #dense neurons
+            a = [64 , 128 , 32 ]
+            a.remove(genome[rand])
+            genome[rand] = choice(a)
+        elif remainder == 5:
+            #activation flag
+            genome[rand] = not genome[rand]
+        elif remainder == 0:
+            #activation type
+            a = ["relu" , "elu" , "tanh" ]
+            a.remove(genome[rand])
+            genome[rand] = choice(a)
+        elif remainder == 1:
+            #drop flag, flipping flag
+            genome[rand] = not genome[rand]
+        elif remainder == 2:
+            #dropout rate
+            a = [0.3 , 0.4 , 0.5 ]
+            a.remove(genome[rand])
+            genome[rand] = choice(a)
 
+    return genome
 
+def combine(a,b):
 
+    c = []
+    split = randint (0, len(b)) 
+    c.extend ( a[:split])
+    c.extend ( b[split:])
+    #making a random mutation at a given rate
+    rand = randint (0,50)
+    if (rand == 2):
+        print("a mutation occurred")
+        c = makingRandomMutation(c)
+    return c
 
+def crossoverAndMutation(lista):
+        
+    newGenotypes = []
+    for i in range (0, populationSize):
+        a,b = selecteTwoRandowPeople(lista)
+        #print ( "selected a and b " + str(a) + "\n\n" + str(b))
+        c = combine(a,b)
+        #print("RESULTING COMBINATION IS " + str(c))
+        newGenotypes.append(c)
+        #print("newGenotype is now  " + str(newGenotypes))
+    return newGenotypes
 
+def binarySearch(data, val):
+    lo, hi = 0, len(data) - 1
+    best_ind = lo
+    while lo <= hi:
+        mid2 = lo + (hi - lo) / 2
+        mid = int(mid2)
+        if data[mid] < val:
+            lo = mid + 1
+        elif data[mid] > val:
+            hi = mid - 1
+        else:
+            best_ind = mid
+            break
+        # check if data[mid] is closer to val than data[best_ind] 
+        if abs(data[mid] - val) < abs(data[best_ind] - val):
+            best_ind = mid
+    return best_ind
 
+def createNewGeneration(olderGeneration):
 
+    #selecting individal with fitness above average
+    newerGenerationGenotype = []
+    toMix = []
 
+    olderGenerationaccuracy = [ obj.accuracy for obj in olderGeneration ]
+    weigthedprobability = np.cumsum( olderGenerationaccuracy)
 
+    for i in range (0, populationSize):
+        #contare pure i -1??
+        rand = uniform (0, weigthedprobability[-1] )
+        #trovare a quale indice appartiene e ritornare il cromosoma corrispondente a quell'accurac
+        index = binarySearch(weigthedprobability, rand)
 
+        cromosoma =  [ t.genotype for t in olderGeneration if t.accuracy ==  olderGenerationaccuracy[index] ]
+    
+        toMix.extend(cromosoma)
+        
+    #print (" Selected nodes to MIX:" + str ( toMix ) )
+    x = crossoverAndMutation( toMix )
+    newerGenerationGenotype.extend( x )
 
+    return newerGenerationGenotype
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def calculateGenerationAccuracy(generation):
+    if len(generation)==0:
+        return 0
+    else:
+        return generation[0].accuracy + calculateGenerationAccuracy(generation[1:]) 
+#---------------------------------------------------------------------------------
 
 def main():
 
@@ -256,8 +401,10 @@ def main():
 
     population = []
     currentpopulation = []
-
-    start = time.time()
+    currentpopulationgenome = []
+    best5 = []
+  
+    start = timer()
 
     for i in range (0, populationSize):
         #create first pseudorandom population genotype and evaluate 
@@ -265,19 +412,55 @@ def main():
         accuracy = createAndEvaluate(genoma, x_train,x_test,y_train,y_test)
         testSub = Individual(genoma,accuracy)
         population.append(testSub)
+        best5 = getBest5(best5,testSub)
+        print("finish number ", str(i) )
 
 
-    end = time.time()
+    end = timer()
 
     elapsedTime = end - start
-    with open('currentpopulation.txt', 'w') as filehandle:  
+
+    avg = calculateGenerationAccuracy(population)/len(population)
+    
+    with open('originalpopulation.txt', 'w') as filehandle:  
         filehandle.writelines("%s\n" % people for people in population)
         filehandle.writelines("Total time: %d\n" % elapsedTime)
+        filehandle.writelines("Average generation accuracy: %s\n" % str(avg)) 
+    
+    print("Original population best five",str(best5))
+ 
 
-    #do ngeneration times
-    #create a new population from the "best" ones and run new evaluation
-    #for i in range (0, generation):
 
+    for gen in range (0, generation):
+        print ("current generation " + str(gen) + "/" + str(generation))
+        currentpopulationgenome = createNewGeneration(population)
+        # for i in range (0, len(currentpopulationgenome)):
+        #     print ( "generation" + str(gen) + "index " + str(i) + " is " + str(currentpopulationgenome[i])  + "\n" )
+        t0 = time.time()
+        #print("start",str(start))
+        for index, obj in enumerate(currentpopulationgenome):
+            accuracy = createAndEvaluate(obj, x_train,x_test,y_train,y_test)
+            testSub = Individual(obj,accuracy)
+            best5 = getBest5(best5,testSub)
+            print("evaluating people n " + str(index) +"of current generation ")
+            currentpopulation.append(testSub)
+
+        f = time.time() - t0
+        #print("elapsed time ",f)
+        avg = calculateGenerationAccuracy(currentpopulation)/len(currentpopulation)
+        in_file = open('currentpopulation'+str(gen)+'.txt', 'w')
+        in_file.writelines("%s\n" % people for people in currentpopulation)
+        in_file.writelines("Total time: %d\n" % f)
+        in_file.writelines("Average generation accuracy: %s\n" % str(avg)) 
+        in_file.close()
+        currentpopulation.clear()
+
+    population.clear()
+
+    print("Writing Original population best five")
+    with open('best5.txt', 'w') as filehandle:  
+        filehandle.writelines("%s\n" % people for people in best5)
 
 if __name__ == "__main__":
     main()
+
