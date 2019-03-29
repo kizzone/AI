@@ -16,7 +16,7 @@ from random import randint,uniform
 from keras import backend as K
 from timeit import default_timer as timer
 K.set_image_dim_ordering('th')
-
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 #----------------------------------------------------------------------------------------------------------------------------------------------
 batch_size = 64
 num_classes = 10
@@ -25,6 +25,7 @@ populationSize = 100
 generation =  100
 pazienza= 5
 #----------------------------------------------------------------------------------------------------------------------------------------------
+
 #Si assicura che i due individui da combinare siano "abbastanza" diversi
 def areNotSimilar(list1, list2):
     z = 0
