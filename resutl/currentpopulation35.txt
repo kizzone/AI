@@ -1,0 +1,103 @@
+[True, 48, 3, False, 'elu', False, 2, True, 0.3, False, 48, 5, False, 'elu', False, 2, True, 0.5, True, 192, 3, True, 'relu', True, 2, False, 0.7, True, 92, 7, True, 'tanh', False, 2, False, 0.7, True, 192, 7, False, 'relu', False, 2, False, 0.5, False, 256, False, 'relu', False, 0.5, True, 256, True, 'relu', False, 0.3, True, 512, False, 'elu', True, 0.7]:0.666
+
+[False, 48, 3, True, 'relu', False, 2, False, 0.4, True, 192, 3, True, 'relu', True, 4, False, 0.3, True, 256, 5, True, 'elu', False, 4, True, 0.7, False, 92, 5, False, 'tanh', True, 2, True, 0.7, True, 256, 3, True, 'relu', True, 2, False, 0.5, True, 128, True, 'relu', True, 0.3, False, 128, False, 'relu', False, 0.3, False, 256, False, 'relu', False, 0.5]:0.52425
+
+[True, 48, 5, False, 'relu', False, 2, True, 0.5, False, 48, 3, True, 'tanh', False, 2, False, 0.4, False, 256, 5, False, 'relu', True, 2, False, 0.7, False, 256, 7, False, 'relu', True, 2, False, 0.7, True, 92, 5, True, 'relu', True, 2, False, 0.7, False, 128, False, 'relu', False, 0.4, False, 128, False, 'elu', False, 0.4, True, 512, True, 'relu', False, 0.7]:0.5905
+
+[False, 48, 7, False, 'relu', True, 2, True, 0.3, True, 48, 3, False, 'relu', False, 2, True, 0.3, True, 256, 7, False, 'relu', True, 2, True, 0.7, True, 256, 5, True, 'tanh', True, 2, False, 0.7, False, 256, 5, False, 'relu', False, 2, True, 0.4, False, 128, False, 'relu', False, 0.5, True, 128, False, 'elu', True, 0.3, False, 256, False, 'tanh', False, 0.4]:0.22825
+
+[False, 48, 3, True, 'relu', False, 2, True, 0.5, False, 48, 3, True, 'tanh', False, 2, False, 0.4, False, 256, 5, False, 'relu', True, 2, False, 0.7, False, 256, 7, False, 'relu', True, 2, False, 0.7, False, 256, 7, True, 'tanh', False, 2, False, 0.7, True, 256, False, 'relu', True, 0.5, True, 128, False, 'relu', True, 0.3, True, 256, True, 'relu', True, 0.7]:0.35225
+
+[False, 48, 3, False, 'elu', True, 2, True, 0.3, False, 48, 5, True, 'relu', False, 4, True, 0.4, False, 92, 5, True, 'elu', False, 2, True, 0.7, False, 192, 7, False, 'relu', False, 2, False, 0.7, True, 92, 5, True, 'elu', False, 4, True, 0.7, False, 128, True, 'relu', False, 0.3, True, 128, True, 'relu', True, 0.4, False, 512, False, 'elu', False, 0.4]:0.17575
+
+[True, 48, 3, True, 'relu', True, 2, True, 0.3, True, 48, 7, False, 'relu', True, 4, True, 0.3, True, 256, 7, True, 'relu', False, 2, True, 0.4, True, 256, 5, True, 'relu', True, 2, True, 0.7, False, 256, 5, True, 'elu', False, 2, True, 0.7, True, 256, False, 'relu', True, 0.4, True, 256, True, 'elu', False, 0.4, True, 512, True, 'relu', True, 0.4]:0.6475
+
+[False, 48, 5, True, 'relu', True, 2, True, 0.3, True, 48, 3, False, 'elu', False, 2, False, 0.3, False, 256, 7, True, 'relu', False, 2, False, 0.5, True, 256, 5, False, 'relu', True, 2, False, 0.7, False, 192, 7, True, 'relu', True, 2, False, 0.7, True, 256, False, 'relu', True, 0.3, True, 128, False, 'elu', True, 0.5, False, 512, True, 'elu', True, 0.5]:0.27325
+
+[True, 48, 3, False, 'relu', False, 2, False, 0.4, True, 92, 3, True, 'elu', False, 4, True, 0.4, False, 92, 5, True, 'elu', False, 2, True, 0.7, True, 256, 5, True, 'elu', True, 2, True, 0.5, False, 256, 7, True, 'elu', True, 2, True, 0.5, False, 128, True, 'relu', True, 0.4, True, 256, False, 'elu', False, 0.3, True, 512, True, 'elu', False, 0.5]:0.67875
+
+[True, 48, 3, False, 'relu', False, 2, False, 0.5, False, 92, 3, False, 'tanh', False, 2, True, 0.4, False, 256, 7, False, 'relu', True, 4, False, 0.7, True, 48, 7, True, 'relu', False, 4, True, 0.7, False, 256, 5, False, 'relu', False, 2, False, 0.7, True, 128, False, 'elu', False, 0.3, False, 128, False, 'relu', False, 0.4, False, 512, True, 'relu', True, 0.7]:0.44075
+
+[False, 48, 5, True, 'relu', True, 2, True, 0.3, True, 48, 3, False, 'elu', False, 2, False, 0.3, False, 256, 7, True, 'relu', False, 2, False, 0.5, True, 256, 5, False, 'relu', True, 2, False, 0.7, False, 256, 5, False, 'relu', True, 2, False, 0.7, True, 256, False, 'relu', True, 0.3, True, 128, False, 'elu', True, 0.5, False, 512, True, 'elu', True, 0.5]:0.41825
+
+[True, 48, 3, False, 'relu', False, 2, False, 0.3, True, 192, 7, False, 'relu', False, 4, True, 0.3, False, 256, 7, True, 'relu', True, 2, False, 0.4, False, 256, 5, False, 'relu', False, 4, False, 0.7, False, 256, 3, True, 'relu', False, 2, False, 0.7, False, 256, False, 'relu', False, 0.4, True, 128, False, 'tanh', False, 0.3, True, 512, True, 'elu', False, 0.7]:0.636
+
+[True, 48, 3, False, 'relu', False, 2, False, 0.4, True, 92, 3, False, 'relu', True, 4, False, 0.3, True, 256, 7, True, 'relu', True, 2, False, 0.4, False, 256, 5, False, 'relu', False, 4, False, 0.7, False, 256, 3, True, 'relu', False, 2, False, 0.7, False, 256, False, 'relu', False, 0.4, True, 128, False, 'tanh', False, 0.3, True, 512, True, 'elu', False, 0.7]:0.64925
+
+[True, 48, 7, False, 'relu', False, 4, True, 0.3, True, 48, 3, True, 'elu', False, 2, False, 0.5, False, 256, 3, True, 'relu', False, 2, True, 0.7, True, 256, 7, True, 'relu', True, 2, False, 0.7, False, 256, 3, True, 'elu', True, 2, True, 0.7, True, 128, False, 'relu', True, 0.3, False, 256, True, 'relu', True, 0.3, False, 512, False, 'relu', False, 0.7]:0.6285
+
+[False, 48, 3, True, 'relu', False, 2, False, 0.4, True, 192, 3, True, 'relu', True, 4, False, 0.3, True, 256, 5, False, 'relu', False, 2, False, 0.7, False, 256, 5, False, 'relu', False, 2, True, 0.7, False, 92, 7, False, 'elu', True, 2, False, 0.7, False, 512, False, 'relu', True, 0.3, False, 128, False, 'relu', False, 0.3, False, 256, False, 'relu', False, 0.5]:0.6025
+
+[True, 48, 3, False, 'elu', False, 2, True, 0.3, False, 48, 5, False, 'elu', False, 2, True, 0.5, True, 192, 3, True, 'relu', True, 2, False, 0.7, True, 92, 7, True, 'tanh', False, 2, False, 0.7, True, 192, 7, False, 'relu', False, 2, False, 0.5, False, 128, True, 'relu', False, 0.5, True, 256, True, 'relu', False, 0.3, True, 512, False, 'elu', True, 0.7]:0.624
+
+[False, 48, 5, True, 'relu', True, 2, True, 0.3, True, 48, 3, False, 'elu', False, 2, False, 0.3, False, 256, 7, True, 'relu', False, 2, False, 0.5, True, 256, 5, False, 'relu', True, 2, False, 0.7, False, 192, 7, True, 'relu', True, 2, False, 0.7, False, 128, False, 'relu', False, 0.4, True, 128, False, 'elu', True, 0.5, False, 512, True, 'elu', True, 0.5]:0.30675
+
+[False, 48, 3, True, 'relu', False, 2, True, 0.3, True, 92, 3, False, 'elu', False, 2, True, 0.3, True, 256, 3, False, 'elu', True, 2, True, 0.7, False, 256, 7, False, 'elu', False, 2, True, 0.7, True, 256, 3, True, 'relu', True, 2, False, 0.5, True, 128, True, 'relu', True, 0.3, False, 128, False, 'relu', False, 0.3, False, 256, False, 'relu', False, 0.5]:0.1965
+
+[False, 92, 3, True, 'relu', True, 2, False, 0.3, False, 92, 5, True, 'relu', True, 2, False, 0.4, False, 256, 3, True, 'relu', False, 2, True, 0.7, True, 256, 7, True, 'relu', True, 2, False, 0.7, False, 256, 3, True, 'elu', True, 2, True, 0.7, True, 128, False, 'relu', True, 0.3, False, 256, True, 'relu', True, 0.3, False, 256, False, 'relu', True, 0.7]:0.10075
+
+[True, 48, 5, False, 'relu', False, 2, True, 0.5, False, 48, 3, True, 'tanh', False, 2, False, 0.4, False, 256, 5, False, 'relu', True, 2, False, 0.7, False, 256, 7, False, 'relu', True, 2, False, 0.7, True, 92, 5, True, 'relu', True, 2, False, 0.7, False, 128, False, 'elu', True, 0.4, False, 256, False, 'relu', False, 0.4, True, 512, True, 'relu', False, 0.7]:0.578
+
+[True, 256, 3, True, 'relu', True, 4, False, 0.4, False, 92, 7, True, 'tanh', False, 2, False, 0.4, False, 192, 5, True, 'elu', False, 4, True, 0.4, True, 256, 7, False, 'relu', True, 2, True, 0.7, False, 92, 7, True, 'relu', True, 2, False, 0.7, False, 256, False, 'elu', False, 0.4, False, 128, False, 'relu', False, 0.5, True, 256, True, 'relu', False, 0.7]:0.682
+
+[False, 92, 3, False, 'tanh', True, 2, True, 0.4, False, 48, 3, True, 'relu', True, 4, True, 0.3, False, 256, 7, False, 'elu', False, 2, False, 0.5, False, 256, 7, True, 'elu', True, 2, True, 0.7, False, 256, 5, False, 'elu', True, 4, True, 0.5, False, 512, False, 'elu', False, 0.4, False, 128, False, 'relu', False, 0.3, False, 256, True, 'tanh', False, 0.7]:-1
+
+[False, 192, 5, True, 'relu', True, 2, True, 0.5, False, 256, 5, False, 'elu', False, 2, True, 0.3, True, 192, 7, False, 'relu', True, 4, True, 0.7, True, 192, 5, True, 'elu', False, 4, True, 0.7, False, 256, 3, True, 'relu', True, 4, True, 0.7, False, 256, True, 'relu', False, 0.3, True, 512, True, 'relu', True, 0.3, False, 512, False, 'elu', False, 0.7]:0.13775
+
+[True, 48, 5, False, 'relu', False, 2, True, 0.5, False, 48, 3, True, 'tanh', False, 2, False, 0.4, False, 192, 5, True, 'elu', False, 4, True, 0.4, True, 256, 7, False, 'relu', True, 2, True, 0.7, True, 92, 5, True, 'relu', True, 2, False, 0.7, False, 128, False, 'relu', False, 0.4, True, 256, True, 'elu', False, 0.4, True, 512, True, 'relu', False, 0.7]:0.61875
+
+[False, 48, 3, True, 'relu', True, 2, False, 0.3, True, 92, 3, True, 'elu', False, 2, False, 0.4, False, 256, 5, False, 'elu', True, 2, True, 0.5, True, 48, 5, True, 'relu', False, 2, True, 0.7, False, 256, 7, True, 'tanh', False, 2, False, 0.7, True, 256, False, 'relu', True, 0.5, True, 128, False, 'relu', True, 0.3, True, 256, True, 'relu', True, 0.7]:0.5575
+
+[False, 48, 7, False, 'relu', True, 2, True, 0.3, True, 48, 3, False, 'relu', False, 2, True, 0.3, True, 256, 7, False, 'relu', True, 2, True, 0.7, True, 256, 5, True, 'tanh', True, 2, False, 0.7, False, 256, 5, False, 'relu', False, 2, True, 0.5, False, 128, True, 'relu', False, 0.3, False, 128, False, 'elu', True, 0.3, False, 256, False, 'tanh', False, 0.4]:0.21575
+
+[False, 192, 3, False, 'elu', True, 2, True, 0.3, False, 192, 5, False, 'relu', False, 4, True, 0.4, False, 92, 5, True, 'elu', False, 2, True, 0.7, False, 192, 7, False, 'relu', False, 2, False, 0.7, True, 92, 5, True, 'elu', False, 4, True, 0.7, False, 128, True, 'relu', False, 0.3, True, 128, True, 'relu', True, 0.4, False, 512, False, 'elu', False, 0.7]:0.11525
+
+[False, 48, 3, True, 'relu', False, 4, True, 0.5, True, 48, 7, False, 'elu', False, 4, True, 0.3, True, 192, 5, False, 'elu', False, 4, False, 0.7, True, 192, 7, True, 'relu', True, 2, False, 0.5, False, 92, 7, True, 'relu', True, 2, True, 0.7, True, 128, False, 'relu', True, 0.3, False, 256, True, 'relu', True, 0.3, False, 256, False, 'relu', True, 0.7]:0.346
+
+[True, 48, 3, True, 'relu', True, 2, True, 0.3, True, 48, 7, False, 'relu', True, 4, True, 0.3, True, 256, 7, True, 'relu', False, 2, True, 0.4, True, 256, 5, True, 'relu', True, 2, True, 0.7, False, 256, 5, True, 'elu', False, 2, True, 0.7, True, 256, False, 'relu', True, 0.3, False, 128, False, 'relu', True, 0.3, True, 256, False, 'relu', False, 0.5]:0.63
+
+[True, 256, 3, False, 'elu', True, 2, True, 0.3, True, 192, 7, False, 'relu', False, 4, True, 0.3, False, 256, 3, True, 'relu', False, 4, True, 0.4, True, 192, 5, False, 'tanh', True, 2, False, 0.7, False, 92, 7, True, 'relu', True, 2, False, 0.7, False, 256, False, 'elu', False, 0.4, False, 128, False, 'relu', False, 0.5, True, 256, True, 'relu', False, 0.7]:0.719
+
+[False, 48, 3, True, 'elu', True, 2, True, 0.3, True, 192, 7, False, 'relu', False, 2, False, 0.4, False, 256, 5, False, 'elu', True, 2, True, 0.5, True, 48, 5, True, 'relu', False, 2, True, 0.7, False, 256, 7, True, 'tanh', False, 2, False, 0.7, True, 256, False, 'relu', True, 0.5, True, 128, False, 'relu', True, 0.3, True, 256, True, 'relu', True, 0.7]:0.2405
+
+[True, 48, 5, False, 'elu', True, 2, True, 0.3, True, 256, 5, False, 'tanh', False, 4, True, 0.3, False, 48, 7, False, 'relu', False, 2, True, 0.7, True, 192, 7, True, 'relu', True, 2, False, 0.5, False, 256, 5, True, 'elu', False, 2, True, 0.7, True, 256, False, 'relu', True, 0.3, False, 128, False, 'relu', True, 0.3, True, 512, False, 'relu', True, 0.4]:0.6685
+
+[True, 192, 5, False, 'tanh', False, 2, False, 0.3, False, 48, 3, False, 'relu', True, 2, True, 0.3, True, 256, 7, True, 'relu', False, 4, True, 0.4, False, 256, 5, False, 'relu', True, 2, False, 0.5, False, 192, 5, True, 'relu', True, 2, False, 0.7, False, 128, False, 'relu', False, 0.5, True, 512, True, 'relu', True, 0.3, False, 256, True, 'relu', True, 0.7]:0.699
+
+[True, 48, 5, False, 'relu', False, 2, True, 0.5, False, 48, 3, True, 'tanh', False, 2, False, 0.4, False, 256, 5, False, 'relu', True, 2, False, 0.7, False, 256, 7, False, 'relu', True, 2, False, 0.7, True, 92, 5, True, 'relu', True, 2, False, 0.7, False, 128, False, 'relu', False, 0.5, True, 256, True, 'elu', False, 0.4, True, 512, True, 'relu', False, 0.7]:0.59675
+
+[False, 92, 3, False, 'tanh', True, 2, True, 0.4, False, 48, 3, True, 'relu', True, 4, True, 0.3, True, 256, 7, False, 'relu', False, 2, True, 0.4, True, 256, 5, True, 'relu', True, 2, True, 0.7, False, 256, 5, True, 'tanh', False, 2, False, 0.7, True, 256, False, 'elu', True, 0.3, True, 128, False, 'relu', True, 0.3, True, 256, False, 'relu', False, 0.7]:0.10025
+
+[True, 48, 3, False, 'relu', False, 2, False, 0.5, False, 92, 3, False, 'tanh', False, 2, True, 0.4, False, 256, 7, False, 'relu', True, 4, False, 0.7, True, 48, 7, True, 'relu', False, 4, True, 0.7, False, 256, 5, False, 'relu', False, 4, True, 0.5, False, 128, False, 'elu', False, 0.4, True, 256, True, 'elu', False, 0.4, True, 512, True, 'relu', False, 0.7]:0.496
+
+[False, 48, 5, False, 'elu', True, 2, True, 0.5, False, 256, 5, False, 'elu', False, 2, True, 0.3, True, 192, 7, False, 'relu', True, 4, True, 0.7, True, 192, 5, True, 'relu', True, 2, False, 0.5, False, 256, 7, False, 'elu', False, 4, False, 0.5, False, 512, False, 'relu', True, 0.5, False, 128, True, 'relu', False, 0.4, True, 256, False, 'relu', False, 0.5]:0.1
+
+[True, 48, 5, True, 'relu', True, 2, True, 0.3, True, 92, 3, False, 'elu', False, 2, True, 0.3, True, 256, 3, False, 'elu', True, 2, True, 0.7, False, 256, 7, False, 'elu', False, 2, True, 0.7, False, 256, 5, True, 'tanh', False, 2, False, 0.7, True, 256, True, 'elu', True, 0.3, True, 128, False, 'elu', True, 0.5, False, 128, False, 'tanh', True, 0.7]:0.48325
+
+[False, 48, 3, True, 'relu', True, 2, False, 0.3, True, 92, 3, True, 'elu', False, 2, False, 0.4, False, 256, 5, False, 'elu', True, 2, True, 0.5, True, 48, 5, True, 'relu', False, 2, True, 0.7, False, 256, 7, True, 'tanh', False, 2, False, 0.7, True, 256, False, 'relu', False, 0.4, True, 128, False, 'relu', True, 0.3, True, 256, True, 'relu', True, 0.7]:0.581
+
+[True, 256, 3, True, 'relu', True, 4, False, 0.4, False, 92, 7, True, 'tanh', False, 2, False, 0.4, False, 192, 5, True, 'elu', False, 4, True, 0.4, True, 256, 7, False, 'relu', True, 2, True, 0.7, False, 92, 7, True, 'relu', True, 2, False, 0.7, False, 256, False, 'elu', False, 0.4, False, 128, False, 'relu', False, 0.5, True, 256, True, 'relu', False, 0.7]:0.716
+
+[True, 48, 5, True, 'relu', True, 2, True, 0.3, True, 92, 3, False, 'elu', False, 2, True, 0.3, True, 256, 3, False, 'elu', True, 2, False, 0.7, False, 256, 7, False, 'relu', True, 2, False, 0.7, True, 92, 5, True, 'relu', True, 2, False, 0.7, False, 128, False, 'relu', False, 0.4, True, 256, True, 'elu', False, 0.4, False, 128, False, 'tanh', True, 0.7]:0.656
+
+[True, 48, 3, False, 'relu', False, 2, False, 0.4, True, 92, 3, True, 'elu', False, 2, False, 0.5, False, 192, 5, False, 'elu', False, 4, False, 0.7, True, 192, 7, True, 'relu', True, 2, False, 0.5, False, 92, 7, True, 'relu', True, 2, True, 0.5, False, 128, True, 'relu', True, 0.4, True, 256, False, 'elu', False, 0.3, True, 512, True, 'elu', False, 0.5]:0.7185
+
+[False, 48, 5, True, 'relu', True, 2, True, 0.3, True, 48, 3, False, 'elu', False, 2, False, 0.3, False, 256, 7, True, 'relu', False, 2, False, 0.5, True, 256, 5, False, 'relu', True, 2, False, 0.7, False, 192, 7, True, 'relu', True, 2, False, 0.7, False, 256, False, 'elu', False, 0.4, False, 128, False, 'relu', False, 0.5, True, 256, True, 'elu', True, 0.5]:0.44825
+
+[False, 48, 7, False, 'relu', True, 2, True, 0.3, True, 48, 3, False, 'relu', False, 2, True, 0.3, True, 256, 7, False, 'relu', True, 2, True, 0.7, True, 192, 5, False, 'tanh', True, 2, False, 0.7, False, 192, 7, False, 'elu', True, 4, True, 0.5, False, 512, False, 'relu', False, 0.3, False, 128, False, 'elu', True, 0.3, False, 256, False, 'tanh', False, 0.4]:0.203
+
+[True, 92, 5, False, 'relu', False, 4, False, 0.3, True, 256, 3, True, 'relu', True, 2, False, 0.5, True, 192, 5, True, 'elu', True, 4, False, 0.7, True, 256, 7, False, 'elu', False, 2, True, 0.7, False, 92, 7, True, 'relu', False, 2, False, 0.7, True, 128, True, 'tanh', False, 0.4, False, 128, True, 'relu', False, 0.4, True, 256, False, 'elu', False, 0.5]:0.751
+
+[False, 92, 3, True, 'relu', True, 2, True, 0.3, False, 92, 5, True, 'relu', True, 2, False, 0.4, False, 256, 3, True, 'relu', False, 2, True, 0.7, True, 256, 7, True, 'relu', True, 2, False, 0.7, False, 256, 3, True, 'elu', True, 2, True, 0.7, True, 128, False, 'relu', True, 0.3, False, 256, True, 'relu', True, 0.3, False, 256, False, 'relu', True, 0.7]:0.09875
+
+[False, 92, 3, False, 'relu', False, 2, False, 0.4, True, 192, 3, True, 'relu', True, 4, False, 0.3, True, 256, 5, True, 'elu', False, 4, True, 0.7, False, 92, 5, False, 'tanh', True, 2, True, 0.7, True, 256, 3, True, 'relu', True, 2, False, 0.5, True, 128, True, 'relu', True, 0.3, True, 128, False, 'relu', True, 0.3, True, 256, False, 'relu', False, 0.7]:0.46425
+
+[False, 48, 3, True, 'relu', True, 2, False, 0.3, True, 92, 5, True, 'relu', True, 2, False, 0.4, False, 256, 3, True, 'relu', False, 2, True, 0.7, True, 256, 7, True, 'relu', False, 2, True, 0.7, False, 256, 7, True, 'tanh', False, 2, False, 0.7, True, 256, False, 'relu', True, 0.5, True, 128, False, 'relu', True, 0.3, True, 256, True, 'relu', True, 0.7]:0.5695
+
+[True, 48, 3, True, 'relu', True, 2, True, 0.3, True, 48, 7, False, 'relu', True, 4, True, 0.3, True, 256, 7, True, 'relu', False, 2, True, 0.4, True, 256, 5, True, 'relu', True, 2, True, 0.7, False, 256, 5, True, 'elu', False, 2, True, 0.7, True, 256, False, 'relu', True, 0.3, False, 128, False, 'relu', True, 0.3, True, 512, False, 'relu', True, 0.4]:0.654
+
+[True, 48, 5, False, 'relu', False, 2, True, 0.5, False, 48, 3, True, 'tanh', False, 2, False, 0.4, False, 256, 5, False, 'relu', False, 2, True, 0.5, True, 256, 7, False, 'elu', True, 2, False, 0.7, True, 92, 5, True, 'relu', True, 2, False, 0.7, False, 128, False, 'relu', False, 0.4, True, 256, True, 'elu', False, 0.4, True, 512, True, 'relu', False, 0.7]:0.624
+
+Total time: 8874
+Average generation accuracy: 0.4441650000000001
+Average working model of generation accuracy: 0.47363775510204087
