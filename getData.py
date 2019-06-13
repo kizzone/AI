@@ -55,9 +55,9 @@ with open('results.csv', 'w') as csvFile:
     writer = csv.writer(csvFile)
     writer.writerows(csv_data)    
     
-plt.xlabel('Accuracy')
-plt.ylabel('Generation number')
-plt.title('Results')
+plt.xlabel('Generation number')
+plt.ylabel('Accuracy')
+plt.title('AVG generations accuracy')
 axes = plt.gca()
 axes.set_ylim([0.0,1.0])
 axes.set_xlim( [0, generationSize ] )
