@@ -16,8 +16,8 @@ class Generation(object):
     def return_csv(self):
         return self.gen, self.time,self.acc
 
-populationSize = int(re.search(r'\d+', picklines("ai.py",24)).group())
-generationSize = int(re.search(r'\d+', picklines("ai.py",25)).group())
+populationSize = int(re.search(r'\d+', picklines("ai.py",28)).group())
+generationSize = int(re.search(r'\d+', picklines("ai.py",29)).group())
 generation = []
 accuracy = []
 
